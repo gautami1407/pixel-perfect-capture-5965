@@ -1,0 +1,3 @@
+- [ ] Build the frontend-first LPS Compliance Intelligence workspace
+- [ ] Add interactive dashboard, inspection workflow, evidence, rules, review, and report states
+- [ ] Verify the preview renders without runtime errors
