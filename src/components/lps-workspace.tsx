@@ -307,7 +307,7 @@ export function LpsWorkspace({
   const go = (view: ViewKey, to: string) => {
     setActiveView(view);
     setSidebarOpen(false);
-    navigate({ to });
+    void navigate({ to } as never);
   };
 
   const run = async (fn: () => Promise<void>) => {
@@ -428,10 +428,12 @@ export function LpsWorkspace({
 
         {activeView === "dashboard" && (
           <Dashboard
+            userName={user?.display_name || "Inspector"}
             summary={summary}
             inspections={inspections}
             updates={updates}
             onNavigate={(view) => go(view, view === "inspection" ? "/inspections/new" : `/${view}`)}
+            onOpenInspection={(id) => navigate({ to: "/inspections/$inspectionId", params: { inspectionId: id } } as never)}
             onNotice={showNotice}
           />
         )}
@@ -571,16 +573,20 @@ function pageLabel(view: ViewKey) {
 }
 
 function Dashboard({
+  userName,
   summary,
   inspections,
   updates,
   onNavigate,
+  onOpenInspection,
   onNotice,
 }: {
+  userName: string;
   summary: DashboardSummary | null;
   inspections: Inspection[];
   updates: DocumentRow[];
   onNavigate: (view: ViewKey) => void;
+  onOpenInspection: (id: string) => void;
   onNotice: (text: string) => void;
 }) {
   const metric = (value: number | null | undefined) => (value == null ? "--" : String(value));
@@ -589,7 +595,7 @@ function Dashboard({
       <div className="page-heading-row">
         <div>
           <p className="section-kicker">INSPECTION CONTROL ROOM</p>
-          <h1>Good morning, Inspector</h1>
+          <h1>Good morning, {userName}</h1>
           <p className="page-description">Review open work, inspect submitted evidence, and track screening activity.</p>
         </div>
         <Button className="primary-action" onClick={() => onNavigate("inspection")}>
@@ -629,7 +635,7 @@ function Dashboard({
             <EmptyTableState icon={Inbox} title="No inspection data connected yet" text="Connect the backend to display live inspection records and review status." action="Start an inspection" onClick={() => onNavigate("inspection")} />
           ) : (
             inspections.slice(0, 6).map((row) => (
-              <button className="table-row" key={row.id} onClick={() => onNavigate("inspections")}>
+              <button className="table-row" key={row.id} onClick={() => onOpenInspection(row.id)}>
                 <span>{row.id.slice(0, 8)}</span>
                 <span>{row.status}</span>
                 <span>{row.premises || "--"}</span>
@@ -1111,9 +1117,9 @@ function QualityStep(props: WorkspaceProps) {
                 <StatusBadge label={image?.quality_status || "Pending"} tone="neutral" />
               </div>
               <div className="quality-lines">
-                <div><span>Resolution</span><b>{image?.quality_metrics ? `${image.quality_metrics.width}×${image.quality_metrics.height}` : "--"}</b></div>
-                <div><span>Blur</span><b>{image?.quality_metrics?.laplacian_variance ?? "--"}</b></div>
-                <div><span>Brightness</span><b>{image?.quality_metrics?.mean_brightness ?? "--"}</b></div>
+                <div><span>Resolution</span><b>{image?.quality_metrics ? `${image.quality_metrics["width"]}×${image.quality_metrics["height"]}` : "--"}</b></div>
+                <div><span>Blur</span><b>{image?.quality_metrics?.["laplacian_variance"] ?? "--"}</b></div>
+                <div><span>Brightness</span><b>{image?.quality_metrics?.["mean_brightness"] ?? "--"}</b></div>
                 <div><span>Visibility</span><b>{image?.quality_reasons?.[0] || "--"}</b></div>
               </div>
             </div>
@@ -1274,8 +1280,9 @@ function DeclarationsStep(props: WorkspaceProps) {
 function EvidenceStep(props: WorkspaceProps) {
   const selected = props.selectedDeclaration;
   const image = props.images.find((item) => item.id === selected?.image_id) || props.images[0];
-  const width = image?.quality_metrics?.width || 1;
-  const height = image?.quality_metrics?.height || 1;
+  const [natural, setNatural] = useState({ w: 1, h: 1 });
+  const width = natural.w;
+  const height = natural.h;
   return (
     <StepShell eyebrow="STEP 08 / EVIDENCE" title="Inspect evidence" description="Click a declaration to highlight its stored bounding box on the original image.">
       <div className="evidence-workspace">
@@ -1285,7 +1292,16 @@ function EvidenceStep(props: WorkspaceProps) {
           </div>
           {image ? (
             <div className="bbox-stage">
-              <img src={imageFileUrl(image.id)} alt="Original evidence" />
+              <img
+                src={imageFileUrl(image.id)}
+                alt="Original evidence"
+                onLoad={(event) =>
+                  setNatural({
+                    w: event.currentTarget.naturalWidth || 1,
+                    h: event.currentTarget.naturalHeight || 1,
+                  })
+                }
+              />
               <svg className="bbox-svg" viewBox={`0 0 ${width} ${height}`} preserveAspectRatio="none">
                 {props.declarations.filter((item) => item.image_id === image.id && item.bbox).map((item) => (
                   <rect
