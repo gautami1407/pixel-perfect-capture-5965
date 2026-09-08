@@ -388,3 +388,21 @@ h3 { font-size: 15px; font-weight: 700; color: var(--color-primary); margin-bott
   .evidence-canvas { min-height: 350px; }
   .canvas-empty { min-height: 300px; }
 }
+
+.login-page { min-height: 100vh; display: grid; place-items: center; padding: 32px 16px; }
+.login-card { width: min(440px, 100%); background: var(--color-card); border: 1px solid var(--color-border); border-radius: 5px; padding: 28px 26px; }
+.login-card .brand-row { display: flex; align-items: center; gap: 10px; margin-bottom: 22px; }
+.login-error { color: var(--status-danger); font-size: 12px; margin: 0 0 12px; }
+.inline-error { color: var(--status-danger); font-size: 12px; margin-top: 8px; }
+.capture-thumb { width: 100%; height: 110px; object-fit: cover; display: block; border-radius: 4px; }
+.bbox-stage { position: relative; width: 100%; min-height: 420px; background: var(--color-muted); overflow: hidden; }
+.bbox-stage img { width: 100%; height: auto; display: block; }
+.bbox-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.bbox-rect { fill: transparent; stroke: oklch(0.72 0.14 73); stroke-width: 2; cursor: pointer; }
+.bbox-rect.active { stroke: oklch(0.52 0.12 150); fill: oklch(0.52 0.12 150 / .12); }
+.ocr-debug { display: grid; gap: 8px; margin-top: 14px; }
+.ocr-debug pre { white-space: pre-wrap; font-size: 11px; background: var(--color-muted); padding: 12px; border-radius: 4px; max-height: 180px; overflow: auto; }
+.table-row { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr 0.8fr; gap: 12px; padding: 12px 16px; border-top: 1px solid var(--color-border); font-size: 13px; text-align: left; }
+.data-table { border: 1px solid var(--color-border); border-radius: 5px; overflow: hidden; background: var(--color-card); }
+.data-table .table-row:first-child { background: var(--color-muted); font-size: 11px; letter-spacing: .04em; text-transform: uppercase; color: var(--color-muted-foreground); border-top: 0; }
+.hidden-file { display: none; }
