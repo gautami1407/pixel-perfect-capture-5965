@@ -5,7 +5,7 @@ import type {
   Applicability,
   CaptureSide,
   Category,
-  Check,
+  Check as CheckType,
   Coverage,
   DashboardSummary,
   Declaration,
@@ -194,7 +194,7 @@ export function LpsWorkspace({
   const [sources, setSources] = useState<SourceRow[]>([]);
   const [updates, setUpdates] = useState<DocumentRow[]>([]);
   const [findings, setFindings] = useState<Finding[]>([]);
-  const [checks, setChecks] = useState<Check[]>([]);
+  const [checks, setChecks] = useState<CheckType[]>([]);
   const [reviews, setReviews] = useState<Review[]>([]);
   const [applicability, setApplicability] = useState<Applicability | null>(null);
   const [screeningOverall, setScreeningOverall] = useState<string | null>(null);
@@ -768,7 +768,7 @@ type WorkspaceProps = {
   productStatus: string | null;
   categories: Category[];
   findings: Finding[];
-  checks: Check[];
+  checks: CheckType[];
   reviews: Review[];
   applicability: Applicability | null;
   screeningOverall: string | null;
@@ -793,7 +793,7 @@ type WorkspaceProps = {
   setExplanation: (value: string | null) => void;
   setReviews: (value: Review[]) => void;
   setFindings: (value: Finding[]) => void;
-  setChecks: (value: Check[]) => void;
+  setChecks: (value: CheckType[]) => void;
 };
 
 function InspectionWorkspace(props: WorkspaceProps) {

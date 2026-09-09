@@ -10,33 +10,227 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AnalyticsRouteImport } from './routes/analytics'
+import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as InspectionsRouteImport } from './routes/inspections'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as ProductsRouteImport } from './routes/products'
+import { Route as ReportsRouteImport } from './routes/reports'
+import { Route as ReviewsRouteImport } from './routes/reviews'
+import { Route as RulesRouteImport } from './routes/rules'
+import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as SourcesRouteImport } from './routes/sources'
+import { Route as UpdatesRouteImport } from './routes/updates'
+import { Route as UsersRouteImport } from './routes/users'
+import { Route as InspectionsIndexRouteImport } from './routes/inspections.index'
+import { Route as InspectionsInspectionIdRouteImport } from './routes/inspections.$inspectionId'
+import { Route as InspectionsNewRouteImport } from './routes/inspections.new'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AnalyticsRoute = AnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InspectionsRoute = InspectionsRouteImport.update({
+  id: '/inspections',
+  path: '/inspections',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductsRoute = ProductsRouteImport.update({
+  id: '/products',
+  path: '/products',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReportsRoute = ReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReviewsRoute = ReviewsRouteImport.update({
+  id: '/reviews',
+  path: '/reviews',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RulesRoute = RulesRouteImport.update({
+  id: '/rules',
+  path: '/rules',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SourcesRoute = SourcesRouteImport.update({
+  id: '/sources',
+  path: '/sources',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UpdatesRoute = UpdatesRouteImport.update({
+  id: '/updates',
+  path: '/updates',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UsersRoute = UsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InspectionsIndexRoute = InspectionsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => InspectionsRoute,
+} as any)
+const InspectionsInspectionIdRoute = InspectionsInspectionIdRouteImport.update({
+  id: '/$inspectionId',
+  path: '/$inspectionId',
+  getParentRoute: () => InspectionsRoute,
+} as any)
+const InspectionsNewRoute = InspectionsNewRouteImport.update({
+  id: '/new',
+  path: '/new',
+  getParentRoute: () => InspectionsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/analytics': typeof AnalyticsRoute
+  '/dashboard': typeof DashboardRoute
+  '/inspections': typeof InspectionsRouteWithChildren
+  '/login': typeof LoginRoute
+  '/products': typeof ProductsRoute
+  '/reports': typeof ReportsRoute
+  '/reviews': typeof ReviewsRoute
+  '/rules': typeof RulesRoute
+  '/settings': typeof SettingsRoute
+  '/sources': typeof SourcesRoute
+  '/updates': typeof UpdatesRoute
+  '/users': typeof UsersRoute
+  '/inspections/$inspectionId': typeof InspectionsInspectionIdRoute
+  '/inspections/new': typeof InspectionsNewRoute
+  '/inspections/': typeof InspectionsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/analytics': typeof AnalyticsRoute
+  '/dashboard': typeof DashboardRoute
+  '/login': typeof LoginRoute
+  '/products': typeof ProductsRoute
+  '/reports': typeof ReportsRoute
+  '/reviews': typeof ReviewsRoute
+  '/rules': typeof RulesRoute
+  '/settings': typeof SettingsRoute
+  '/sources': typeof SourcesRoute
+  '/updates': typeof UpdatesRoute
+  '/users': typeof UsersRoute
+  '/inspections/$inspectionId': typeof InspectionsInspectionIdRoute
+  '/inspections/new': typeof InspectionsNewRoute
+  '/inspections': typeof InspectionsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/analytics': typeof AnalyticsRoute
+  '/dashboard': typeof DashboardRoute
+  '/inspections': typeof InspectionsRouteWithChildren
+  '/login': typeof LoginRoute
+  '/products': typeof ProductsRoute
+  '/reports': typeof ReportsRoute
+  '/reviews': typeof ReviewsRoute
+  '/rules': typeof RulesRoute
+  '/settings': typeof SettingsRoute
+  '/sources': typeof SourcesRoute
+  '/updates': typeof UpdatesRoute
+  '/users': typeof UsersRoute
+  '/inspections/$inspectionId': typeof InspectionsInspectionIdRoute
+  '/inspections/new': typeof InspectionsNewRoute
+  '/inspections/': typeof InspectionsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/analytics'
+    | '/dashboard'
+    | '/inspections'
+    | '/login'
+    | '/products'
+    | '/reports'
+    | '/reviews'
+    | '/rules'
+    | '/settings'
+    | '/sources'
+    | '/updates'
+    | '/users'
+    | '/inspections/$inspectionId'
+    | '/inspections/new'
+    | '/inspections/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/analytics'
+    | '/dashboard'
+    | '/login'
+    | '/products'
+    | '/reports'
+    | '/reviews'
+    | '/rules'
+    | '/settings'
+    | '/sources'
+    | '/updates'
+    | '/users'
+    | '/inspections/$inspectionId'
+    | '/inspections/new'
+    | '/inspections'
+  id:
+    | '__root__'
+    | '/'
+    | '/analytics'
+    | '/dashboard'
+    | '/inspections'
+    | '/login'
+    | '/products'
+    | '/reports'
+    | '/reviews'
+    | '/rules'
+    | '/settings'
+    | '/sources'
+    | '/updates'
+    | '/users'
+    | '/inspections/$inspectionId'
+    | '/inspections/new'
+    | '/inspections/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AnalyticsRoute: typeof AnalyticsRoute
+  DashboardRoute: typeof DashboardRoute
+  InspectionsRoute: typeof InspectionsRouteWithChildren
+  LoginRoute: typeof LoginRoute
+  ProductsRoute: typeof ProductsRoute
+  ReportsRoute: typeof ReportsRoute
+  ReviewsRoute: typeof ReviewsRoute
+  RulesRoute: typeof RulesRoute
+  SettingsRoute: typeof SettingsRoute
+  SourcesRoute: typeof SourcesRoute
+  UpdatesRoute: typeof UpdatesRoute
+  UsersRoute: typeof UsersRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +242,144 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/analytics': {
+      id: '/analytics'
+      path: '/analytics'
+      fullPath: '/analytics'
+      preLoaderRoute: typeof AnalyticsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/inspections': {
+      id: '/inspections'
+      path: '/inspections'
+      fullPath: '/inspections'
+      preLoaderRoute: typeof InspectionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/products': {
+      id: '/products'
+      path: '/products'
+      fullPath: '/products'
+      preLoaderRoute: typeof ProductsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reports': {
+      id: '/reports'
+      path: '/reports'
+      fullPath: '/reports'
+      preLoaderRoute: typeof ReportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reviews': {
+      id: '/reviews'
+      path: '/reviews'
+      fullPath: '/reviews'
+      preLoaderRoute: typeof ReviewsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rules': {
+      id: '/rules'
+      path: '/rules'
+      fullPath: '/rules'
+      preLoaderRoute: typeof RulesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sources': {
+      id: '/sources'
+      path: '/sources'
+      fullPath: '/sources'
+      preLoaderRoute: typeof SourcesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/updates': {
+      id: '/updates'
+      path: '/updates'
+      fullPath: '/updates'
+      preLoaderRoute: typeof UpdatesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/users': {
+      id: '/users'
+      path: '/users'
+      fullPath: '/users'
+      preLoaderRoute: typeof UsersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/inspections/': {
+      id: '/inspections/'
+      path: '/'
+      fullPath: '/inspections/'
+      preLoaderRoute: typeof InspectionsIndexRouteImport
+      parentRoute: typeof InspectionsRoute
+    }
+    '/inspections/$inspectionId': {
+      id: '/inspections/$inspectionId'
+      path: '/$inspectionId'
+      fullPath: '/inspections/$inspectionId'
+      preLoaderRoute: typeof InspectionsInspectionIdRouteImport
+      parentRoute: typeof InspectionsRoute
+    }
+    '/inspections/new': {
+      id: '/inspections/new'
+      path: '/new'
+      fullPath: '/inspections/new'
+      preLoaderRoute: typeof InspectionsNewRouteImport
+      parentRoute: typeof InspectionsRoute
+    }
   }
 }
 
+interface InspectionsRouteChildren {
+  InspectionsInspectionIdRoute: typeof InspectionsInspectionIdRoute
+  InspectionsNewRoute: typeof InspectionsNewRoute
+  InspectionsIndexRoute: typeof InspectionsIndexRoute
+}
+
+const InspectionsRouteChildren: InspectionsRouteChildren = {
+  InspectionsInspectionIdRoute: InspectionsInspectionIdRoute,
+  InspectionsNewRoute: InspectionsNewRoute,
+  InspectionsIndexRoute: InspectionsIndexRoute,
+}
+
+const InspectionsRouteWithChildren = InspectionsRoute._addFileChildren(
+  InspectionsRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AnalyticsRoute: AnalyticsRoute,
+  DashboardRoute: DashboardRoute,
+  InspectionsRoute: InspectionsRouteWithChildren,
+  LoginRoute: LoginRoute,
+  ProductsRoute: ProductsRoute,
+  ReportsRoute: ReportsRoute,
+  ReviewsRoute: ReviewsRoute,
+  RulesRoute: RulesRoute,
+  SettingsRoute: SettingsRoute,
+  SourcesRoute: SourcesRoute,
+  UpdatesRoute: UpdatesRoute,
+  UsersRoute: UsersRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
